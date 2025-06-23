@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
-// This file is responsible for connecting to the MongoDB database using Mongoose.
 
 export const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log("mongoDB connected : ${conn.connection.host}");
+    console.log(`mongoDB connected : ${conn.connection.host}`);
   } catch (error) {
-    console.error("Database connection failed:", error);
+    console.error("Database connection failed:", error.message);
+    process.exit(1); // ✅ Only exit if there's an error
   }
-  process.exit(1);
 };
